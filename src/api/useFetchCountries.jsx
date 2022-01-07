@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ALL_COUNTRIES } from "./config";
 
 export const useFetchAllCountries = () => {
