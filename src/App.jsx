@@ -1,41 +1,29 @@
-import { useFetchCountries } from "./api/useFetchCountries";
-import { Controls } from "./components/form/Controls";
+import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/header/Header";
-import { List } from "./components/list/List";
 import { Main } from "./components/main/Main";
-import { Card } from "./components/card/Card";
+import { HomePage } from "./pages/HomePage";
+import { Details } from "./pages/Details";
+import { NotFound } from "./pages/NotFound";
+import { useFetchAllCountries } from './api/useFetchCountries';
 
 const App = () => {
-  const { countries } = useFetchCountries();
+  const { countries } = useFetchAllCountries();
   console.log(countries);
   return (
     <>
       <Header />
       <Main>
-        <Controls />
-        <List>
-          {countries.map((country) => {
-            const countryInfo = {
-              img: country.flags.png,
-              name: country.name,
-              info: [
-                {
-                  title: "Population",
-                  description: country.population.toString(),
-                },
-                {
-                  title: "Region",
-                  description: country.region,
-                },
-                {
-                  title: "Capital",
-                  description: country.capital,
-                },
-              ],
-            };
-            return <Card key={country.name} countryInfo={countryInfo} />;
-          })}
-        </List>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <HomePage countries={countries} />
+            }
+          />
+          <Route path="/country/:name" element={<Details />} />
+          <Route element={<NotFound />} />
+        </Routes>
       </Main>
     </>
   );

@@ -2,10 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ALL_COUNTRIES } from "./config";
 
-export const useFetchCountries = () => {
+export const useFetchAllCountries = () => {
   const [countries, setCountries] = useState([]);
 
-  const getCountries = async () => {
+  const getAllCountries = async () => {
     try {
       const response = await axios.get(ALL_COUNTRIES);
       const result = await response.data;
@@ -16,9 +16,11 @@ export const useFetchCountries = () => {
   };
 
   useEffect(() => {
-    getCountries();
+    if (!countries.length) {
+      getAllCountries();
+    }
   }, []);
-  
+
   return {
     countries,
   };

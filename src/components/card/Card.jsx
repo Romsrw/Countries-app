@@ -5,10 +5,10 @@ import { CardListItem } from "./CardlistItem";
 import { CardTitle } from "./CardTitle";
 import { CardWrapper } from "./CardWrapper";
 
-export const Card = ({ countryInfo }) => {
+export const Card = ({ countryInfo, onClick }) => {
   const { img, name, info } = countryInfo;
   return (
-    <CardWrapper>
+    <CardWrapper onClick={onClick}>
       <CardImage src={img} alt={name} />
       <CardBody>
         <CardTitle>{name}</CardTitle>
