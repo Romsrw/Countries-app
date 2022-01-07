@@ -13,7 +13,6 @@ export const useFetchAllCountries = () => {
       const response = await axios.get(ALL_COUNTRIES);
       const result = await response.data;
       setCountries(result);
-      console.log(result);
     } catch (error) {
       console.warn(error);
     } finally {

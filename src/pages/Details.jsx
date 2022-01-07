@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { IoArrowBack } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { searchByCountry } from "../api/config";
+import { IoArrowBack } from "react-icons/io5";
 import { Button } from "../components/button/Button";
 import { Info } from "../components/info/Info";
 

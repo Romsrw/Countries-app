@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 export const Header = () => {
   const [theme, setTheme] = useState("light");
 
-  const toggleTheme = () => setTheme((prevTheme) => prevTheme === "light" ? "dark" : "light");
+  const toggleTheme = () =>
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);

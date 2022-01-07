@@ -29,7 +29,7 @@ export const Info = (props) => {
 
   const [neighbors, setNeighbors] = useState([]);
   const navigate = useNavigate();
-  console.log(neighbors);
+ 
   useEffect(() => {
     if (borders.length)
       axios
