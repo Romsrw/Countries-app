@@ -9,7 +9,7 @@ export const Card = ({ countryInfo }) => {
   const { img, name, info } = countryInfo;
   return (
     <CardWrapper>
-      <CardImage />
+      <CardImage src={img} alt={name} />
       <CardBody>
         <CardTitle>{name}</CardTitle>
         <CardList>
