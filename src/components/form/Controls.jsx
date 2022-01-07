@@ -11,25 +11,20 @@ const options = [
   { value: "Oceania", label: "Oceania" },
 ];
 
-export const Controls = ({ onSearch }) => {
-  const [search, setSearch] = useState("");
-  const [region, setRegion] = useState("");
-
-  useEffect(() => {
-    const regionValue = region?.value || "";
-    onSearch(search, regionValue);
-  }, [search, region]);
-
+export const Controls = ({ onSearch, filters }) => {
   return (
     <ControlWrapper>
-      <Search search={search} setSearch={setSearch} />
+      <Search
+        search={filters.search}
+        setSearch={(search) => onSearch((prev) => ({ ...prev, search }))}
+      />
       <CustomSelect
         options={options}
         placeholder="Filter by Region"
         isClearable
         isSearchable={false}
-        value={region}
-        onChange={setRegion}
+        value={filters.region}
+        onChange={(region) => onSearch((prev) => ({ ...prev, region }))}
       />
     </ControlWrapper>
   );

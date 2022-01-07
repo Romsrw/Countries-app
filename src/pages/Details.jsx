@@ -3,12 +3,13 @@ import { IoArrowBack } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { searchByCountry } from "../api/config";
+import { Button } from "../components/button/Button";
+import { Info } from "../components/info/Info";
 
 export const Details = () => {
   const { name } = useParams();
-  const navigate = useNavigate();
   const [country, setCountry] = useState(null);
-  console.log(country);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(searchByCountry(name)).then(({ data }) => setCountry(data[0]));
@@ -16,10 +17,10 @@ export const Details = () => {
 
   return (
     <div>
-      <button onClick={() => navigate(-1)}>
+      <Button onClick={() => navigate(-1)}>
         <IoArrowBack /> Back
-      </button>
-      Details {name}
+      </Button>
+      {country && <Info {...country} />}
     </div>
   );
 };

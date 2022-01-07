@@ -3,25 +3,27 @@ import { useState, useEffect } from "react";
 import { ALL_COUNTRIES } from "./config";
 
 export const useFetchAllCountries = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState([]);
 
   const getAllCountries = async () => {
+    if (countries.length) return;
     try {
+      setIsLoading(true);
       const response = await axios.get(ALL_COUNTRIES);
       const result = await response.data;
       setCountries(result);
+      console.log(result);
     } catch (error) {
       console.warn(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (!countries.length) {
-      getAllCountries();
-    }
-  }, []);
-
   return {
+    isLoading,
     countries,
+    getAllCountries,
   };
 };

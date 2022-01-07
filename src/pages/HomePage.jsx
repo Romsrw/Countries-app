@@ -1,31 +1,39 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFetchAllCountries } from "../api/useFetchCountries";
 import { Card } from "../components/card/Card";
 import { Controls } from "../components/form/Controls";
 import { List } from "../components/list/List";
 
-export const HomePage = ({ countries, setCountries }) => {
-  const [filtredCountries, setFiltredCountries] = useState(countries);
+export const HomePage = () => {
+    
+  const { countries, getAllCountries, isLoading } = useFetchAllCountries();
+
+  const [filters, setFilters] = useState({ search: "", region: null });
+
   const navigate = useNavigate();
 
-  const handlerSearch = (search, region) => {
-    let data = [...countries];
-    if (region) {
-      data = data.filter((c) => c.region.includes(region));
-    }
-    if (search) {
-      data = data.filter((c) =>
-        c.name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-    setFiltredCountries(data);
-  };
+  const filteredCountries = useMemo(
+    () =>
+      countries
+        .filter((country) =>
+          country.region.includes(filters.region?.value || "")
+        )
+        .filter((country) =>
+          country.name.toLowerCase().includes(filters.search.toLowerCase())
+        ),
+    [filters, countries]
+  );
+
+  useEffect(() => {
+    getAllCountries();
+  }, []);
 
   return (
     <>
-      <Controls onSearch={handlerSearch} />
+      <Controls onSearch={setFilters} filters={filters} />
       <List>
-        {filtredCountries.map((country) => {
+        {filteredCountries.map((country) => {
           const countryInfo = {
             img: country.flags.png,
             name: country.name,
