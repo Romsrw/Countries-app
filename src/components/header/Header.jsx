@@ -23,7 +23,7 @@ export const Header = () => {
     <HeaderEl>
       <Container>
         <HeaderWrapper>
-          <Title onClick={() => navigate(`/`)}>Where is the world?</Title>
+          <Title onClick={() => navigate(`/Countries-app`)}>Where is the world?</Title>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === "light" ? (
               <IoMoonOutline size="14px" />

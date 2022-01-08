@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { Main } from "./components/main/Main";
 import { HomePage } from "./pages/HomePage";
@@ -11,7 +11,8 @@ const App = () => {
       <Header />
       <Main>
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
+          <Route path="/" element={<Navigate to="/Countries-app" />} />
+          <Route exact path="/Countries-app" element={<HomePage />} />
           <Route path="/country/:name" element={<Details />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
