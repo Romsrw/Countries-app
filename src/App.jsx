@@ -11,8 +11,8 @@ const App = () => {
       <Header />
       <Main>
         <Routes>
-          <Route path="/" element={<Navigate to="/Countries-app" />} />
-          <Route exact path="/Countries-app" element={<HomePage />} />
+          <Route exact path="/" element={<Navigate to="/Countries-app" />} />
+          <Route path="/Countries-app" element={<HomePage />} />
           <Route path="/country/:name" element={<Details />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
