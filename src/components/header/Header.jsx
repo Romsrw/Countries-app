@@ -1,13 +1,16 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
 import { Container } from "../container/Container";
 import { HeaderEl } from "./HeaderEl";
 import { HeaderWrapper } from "./HeaderWrapper";
 import { Title } from "./Title";
 import { ModeSwitcher } from "./ModeSwitcher";
-import { useEffect, useState } from "react";
 
 export const Header = () => {
   const [theme, setTheme] = useState("light");
+
+  const navigate = useNavigate();
 
   const toggleTheme = () =>
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -20,7 +23,7 @@ export const Header = () => {
     <HeaderEl>
       <Container>
         <HeaderWrapper>
-          <Title>Where is the world?</Title>
+          <Title onClick={() => navigate(`/`)}>Where is the world?</Title>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === "light" ? (
               <IoMoonOutline size="14px" />
